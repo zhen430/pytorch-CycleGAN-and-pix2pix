@@ -228,7 +228,7 @@ class GANLoss(nn.Module):
         self.register_buffer("real_label", torch.tensor(target_real_label))
         self.register_buffer("fake_label", torch.tensor(target_fake_label))
         self.gan_mode = gan_mode
-        if gan_mode == "lsgan":
+        if gan_mode == "lsgan":  #mse/bce都行
             self.loss = nn.MSELoss()
         elif gan_mode == "vanilla":
             self.loss = nn.BCEWithLogitsLoss()
@@ -515,7 +515,7 @@ class UnetSkipConnectionBlock(nn.Module):
             return torch.cat([x, self.model(x)], 1)
 
 
-class NLayerDiscriminator(nn.Module):
+class NLayerDiscriminator(nn.Module):  #patchgan，一堆4*4卷积，一开始步长2，后来步长1.最后(B, 1, 30, 30)，每个像素的感受野是70.
     """Defines a PatchGAN discriminator"""
 
     def __init__(self, input_nc, ndf=64, n_layers=3, norm_layer=nn.BatchNorm2d):

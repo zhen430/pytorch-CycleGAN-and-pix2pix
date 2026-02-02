@@ -22,7 +22,7 @@ import importlib
 from models.base_model import BaseModel
 
 
-def find_model_using_name(model_name: str):
+def find_model_using_name(model_name: str):  #相当于import模型
     """Import the module "models/[model_name]_model.py".
 
     In the file, the class called DatasetNameModel() will
@@ -30,9 +30,9 @@ def find_model_using_name(model_name: str):
     and it is case-insensitive.
     """
     model_filename = "models." + model_name + "_model"
-    modellib = importlib.import_module(model_filename)
+    modellib = importlib.import_module(model_filename)  #相当于 import models.pix2pix_model
     model = None
-    target_model_name = model_name.replace("_", "") + "model"
+    target_model_name = model_name.replace("_", "") + "model"  #"pix2pixmodel"
     for name, cls in modellib.__dict__.items():
         if name.lower() == target_model_name.lower() and issubclass(cls, BaseModel):
             model = cls

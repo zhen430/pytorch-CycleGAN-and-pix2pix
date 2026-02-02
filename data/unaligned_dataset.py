@@ -57,10 +57,10 @@ class UnalignedDataset(BaseDataset):
         A_img = Image.open(A_path).convert("RGB")
         B_img = Image.open(B_path).convert("RGB")
         # apply image transformation
-        A = self.transform_A(A_img)
+        A = self.transform_A(A_img)  #经过变换的图片
         B = self.transform_B(B_img)
 
-        return {"A": A, "B": B, "A_paths": A_path, "B_paths": B_path}
+        return {"A": A, "B": B, "A_paths": A_path, "B_paths": B_path}  #返回一个字典，包括2组图片和路径
 
     def __len__(self):
         """Return the total number of images in the dataset.

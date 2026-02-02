@@ -19,7 +19,7 @@ import os
 from data.base_dataset import BaseDataset
 
 
-def find_dataset_using_name(dataset_name):
+def find_dataset_using_name(dataset_name):  #按照dataset_name从不同文件中import，比如从unaligned_dataset.py中
     """Import the module "data/[dataset_name]_dataset.py".
 
     In the file, the class called DatasetNameDataset() will

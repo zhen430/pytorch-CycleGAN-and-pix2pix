@@ -29,12 +29,15 @@ from util.util import init_ddp, cleanup_ddp
 
 if __name__ == "__main__":
     opt = TrainOptions().parse()  # get training options
+    #option/train.py和base.py，超参配置
     opt.device = init_ddp()
     dataset = create_dataset(opt)  # create a dataset given opt.dataset_mode and other options
+    #data/init.py指向不同的文件去import，比如unaligned_dataset.py，才是真正的dataset，回到data/init.py dataloader
     dataset_size = len(dataset)  # get the number of images in the dataset.
     print(f"The number of training images = {dataset_size}")
 
     model = create_model(opt)  # create a model given opt.model and other options
+    #model/init.py指向不同的文件去import，比如pix2pix_model.py，具体的网络结构判别器生成器在network.py中
     model.setup(opt)  # regular setup: load and print networks; create schedulers
     visualizer = Visualizer(opt)  # create a visualizer that display/save images and plots
     total_iters = 0  # the total number of training iterations
